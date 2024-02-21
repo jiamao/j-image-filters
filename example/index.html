@@ -23,11 +23,33 @@
 </head>
 
 <body>
-	
-
+	<img id="src_img" src="cat.jpg" width="400" />
+	<img id="dst_img" width="400" />
 </body>
 <script type="module">
-	
+	import ImageFilter from "../dist/index.esm.js";
+
+	//反色
+	const RFilter = (color) => {
+			color.r = 255 - color.r;
+			color.g = 255 - color.g;
+			color.b = 255 - color.b;
+			return color;
+		};
+
+	const imgFilters = new ImageFilter();
+	imgFilters.add(RFilter);
+
+	const source = document.getElementById('src_img');
+
+	imgFilters.filter(source).then((data) => {
+
+		const dst = imgFilters.toBase64(data);
+
+		document.getElementById('dst_img').src = dst;
+	});
+
+		
 </script>
 
 </html>

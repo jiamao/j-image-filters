@@ -1,7 +1,7 @@
 {
-  "name": "j-eventemitter",
+  "name": "j-image-filters",
   "version": "1.0.1",
-  "description": "事件 emit",
+  "description": "图片滤镜",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
@@ -51,7 +51,7 @@
     "vitest": "^1.2.2"
   },
   "dependencies": {
-    "eventemitter3": "^5.0.1"
+    
   },
   "author": "fefeding",
   "license": "MIT"

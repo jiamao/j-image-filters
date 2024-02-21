@@ -1,8 +1,8 @@
-# j-util
-工具类
+# j-image-filters
+图片滤镜
 
 ```bash
-npm i j-eventemitter
+npm i j-image-filters
 ```
 
 # API

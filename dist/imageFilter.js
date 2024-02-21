@@ -1,4 +1,4 @@
-class ImageFilters {
+export default class ImageFilters {
     constructor(filters) {
         if (filters && filters.length) {
             this.filters.push(...filters);
@@ -103,5 +103,3 @@ class ImageFilters {
         }
     }
 }
-
-export { ImageFilters as default };
