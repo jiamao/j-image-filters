@@ -26,6 +26,10 @@ export default class ImageFilters implements IFilterManager {
     // 所有支持的滤镜
     protected filters = new Array<IFilter>();
 
+    clear() {
+        this.filters.splice(0, this.filters.length);
+    }
+
     /**
      * 把图片转成数据
      * @param img 
@@ -64,8 +68,8 @@ export default class ImageFilters implements IFilterManager {
         }
 
         // 滤镜处理, 如果是全量统一处理的滤镜，则直接处理原始数据
-        filters.map(({filter, option}) => {                
-            if(filter && image instanceof ImageData) filter(image, option);
+        filters.map((filter) => {                
+            if(filter.filter && image instanceof ImageData) filter.filter(image, filter.option);
         });
 
         for(let i=0; i < image.data.length; i += 4) {
@@ -76,8 +80,8 @@ export default class ImageFilters implements IFilterManager {
                 a: image.data[i+3],
             };
             // 滤镜处理
-            filters.map(({filterColor, option}) => {                
-                if(filterColor) color = filterColor(color, option);
+            filters.map((filter) => {                
+                if(filter.filterColor) color = filter.filterColor(color, filter.option);
             });
             image.data[i] = color.r;
             image.data[i+1] = color.g;

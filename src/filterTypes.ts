@@ -34,6 +34,13 @@ export interface BlurFilterOption extends FilterOption {
     sigma: number;
 }
 
+/**
+ * 马赛克参数
+ */
+export interface MosaicFilterOption extends FilterOption {
+    blur: number;    
+}
+
 export type FilterType = ((color: Color, option?: FilterOption) => Color);
 
 
@@ -43,6 +50,8 @@ export type FilterType = ((color: Color, option?: FilterOption) => Color);
 export interface IFilter {
 
     name: string;
+    // 中文名
+    displayName?: string;
 
     /**
      * 调节参数
@@ -68,4 +77,6 @@ export interface IFilterManager {
     add(filter: IFilter | Array< IFilter| FilterType>): void;
 
     remove(filter: FilterType | IFilter | Array<IFilter|string|FilterType> | string): void;
+
+    clear(): void;
 }

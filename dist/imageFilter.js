@@ -15,6 +15,9 @@ export default class ImageFilters {
     }
     // 所有支持的滤镜
     filters = new Array();
+    clear() {
+        this.filters.splice(0, this.filters.length);
+    }
     /**
      * 把图片转成数据
      * @param img
@@ -49,6 +52,11 @@ export default class ImageFilters {
         if (image instanceof HTMLImageElement) {
             image = await this.convertToImageData(image);
         }
+        // 滤镜处理, 如果是全量统一处理的滤镜，则直接处理原始数据
+        filters.map((filter) => {
+            if (filter.filter && image instanceof ImageData)
+                filter.filter(image, filter.option);
+        });
         for (let i = 0; i < image.data.length; i += 4) {
             let color = {
                 r: image.data[i],
@@ -58,7 +66,8 @@ export default class ImageFilters {
             };
             // 滤镜处理
             filters.map((filter) => {
-                color = typeof filter === 'function' ? filter(color) : filter.filter(color);
+                if (filter.filterColor)
+                    color = filter.filterColor(color, filter.option);
             });
             image.data[i] = color.r;
             image.data[i + 1] = color.g;
@@ -80,8 +89,16 @@ export default class ImageFilters {
      * @param filter
      */
     add(filter) {
-        if (Array.isArray(filter))
-            this.filters.push(...filter);
+        if (Array.isArray(filter)) {
+            for (const f of filter)
+                this.add(f);
+        }
+        else if (typeof filter === 'function') {
+            this.filters.push({
+                name: '',
+                filterColor: filter
+            });
+        }
         else
             this.filters.push(filter);
     }
@@ -96,7 +113,7 @@ export default class ImageFilters {
         }
         else {
             for (let i = this.filters.length - 1; i >= 0; i--) {
-                if (this.filters[i] === filter) {
+                if ((typeof filter === 'string' && this.filters[i].name === filter) || this.filters[i] === filter || this.filters[i].filter === filter) {
                     this.filters.splice(i, 1);
                 }
             }

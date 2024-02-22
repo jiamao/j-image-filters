@@ -25,30 +25,42 @@
 <body>
 	<img id="src_img" src="cat.jpg" width="400" />
 	<img id="dst_img" width="400" />
+	<hr />
+	<div id="buttons"></div>
 </body>
 <script type="module">
-	import ImageFilter from "../dist/index.esm.js";
-
-	//反色
-	const RFilter = (color) => {
-			color.r = 255 - color.r;
-			color.g = 255 - color.g;
-			color.b = 255 - color.b;
-			return color;
-		};
+	import ImageFilter, { filters } from "../dist/index.esm.js";
 
 	const imgFilters = new ImageFilter();
-	imgFilters.add(RFilter);
+	
 
 	const source = document.getElementById('src_img');
 
-	imgFilters.filter(source).then((data) => {
+	function setFilter(name) {
+		imgFilters.clear();
 
-		const dst = imgFilters.toBase64(data);
+		imgFilters.add(new filters[name]());
+		imgFilters.filter(source).then((data) => {
 
-		document.getElementById('dst_img').src = dst;
-	});
+			const dst = imgFilters.toBase64(data);
 
+			document.getElementById('dst_img').src = dst;
+		});
+	}
+
+	const buttonContainer = document.getElementById('buttons');
+	function buttonClick(e) {
+		const name = this.getAttribute('data-filter');
+		setFilter(name);
+	}
+	for(const name in filters) {
+		const filter = new filters[name]();
+		const button = document.createElement('button');
+		button.textContent = filter.displayName || name;
+		button.setAttribute('data-filter', name);
+		button.onclick = buttonClick;
+		buttonContainer.appendChild(button);
+	}
 		
 </script>
 
