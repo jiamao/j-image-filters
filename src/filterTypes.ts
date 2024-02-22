@@ -26,6 +26,14 @@ export interface OldPhotoOption extends FilterOption {
     bColor?: Color;
 } 
 
+/**
+ * 模糊参数
+ */
+export interface BlurFilterOption extends FilterOption {
+    radius: number;
+    sigma: number;
+}
+
 export type FilterType = ((color: Color, option?: FilterOption) => Color);
 
 

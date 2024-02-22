@@ -111,7 +111,7 @@ export default class ImageFilters implements IFilterManager {
         else if(typeof filter === 'function') {
             this.filters.push({
                 name: '',
-                filter: filter
+                filterColor: filter
             })
         }
         else this.filters.push(filter);

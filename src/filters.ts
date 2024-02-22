@@ -1,6 +1,11 @@
-import { IFilter, Color, FilterOption, OldPhotoOption } from './filterTypes';
+import { IFilter, Color, FilterOption, OldPhotoOption, BlurFilterOption } from './filterTypes';
+
 
 export abstract class Filter implements IFilter {
+    constructor(option?: FilterOption) {
+        if(option) this.option = option;
+    }
+
     name: string;
     option?: FilterOption = {
         luminance: 0
@@ -22,7 +27,7 @@ export abstract class Filter implements IFilter {
  * 反色滤镜
  */
 export class ReverseFilter extends Filter {
-    name = 'reverseFilter';
+    name = 'ReverseFilter';
     // 颜色处理
     filterColor(color: Color) {
         color.r = 255 - color.r;
@@ -36,7 +41,7 @@ export class ReverseFilter extends Filter {
  * 灰度滤镜
  */
 export class GrayFilter extends Filter {
-    name = 'grayFilter';
+    name = 'GrayFilter';
     option = {
         r: 0.3, g: 0.6, b: 0.1
     };
@@ -55,7 +60,7 @@ export class GrayFilter extends Filter {
  * 默白滤镜
  */
 export class BlackFilter extends Filter {
-    name = 'blackFilter';
+    name = 'BlackFilter';
     // 颜色处理
     filterColor(color: Color) {
         const avg = this.checkColorValue((color.r + color.g + color.b) / 3);
@@ -71,7 +76,7 @@ export class BlackFilter extends Filter {
  * 亮度滤镜
  */
 export class BrightnessFilter extends Filter {
-    name = 'brightnessFilter';
+    name = 'BrightnessFilter';
     option = {
         luminance: 0
     }
@@ -89,8 +94,8 @@ export class BrightnessFilter extends Filter {
 /**
  * RGB通道滤镜
  */
-export class rgbFilter extends Filter {
-    name = 'rgbFilter';
+export class RGBFilter extends Filter {
+    name = 'RGBFilter';
 
     // 颜色处理
     filterColor(color: Color, option: FilterOption = this.option) {
@@ -104,8 +109,8 @@ export class rgbFilter extends Filter {
 /**
  * 透明度
  */
-export class opacityFilter extends Filter {
-    name = 'opacityFilter'
+export class OpacityFilter extends Filter {
+    name = 'OpacityFilter'
     // 颜色处理
     filterColor(color: Color, option: FilterOption = this.option) {
         
@@ -118,8 +123,8 @@ export class opacityFilter extends Filter {
 /**
  * RGB蒙版滤镜
  */
-export class rgbMaskFilter extends Filter {
-    name = 'rgbMaskFilter';
+export class RGBMaskFilter extends Filter {
+    name = 'RGBMaskFilter';
     // 颜色处理
     filterColor(color: Color, option: FilterOption = this.option) {
         
@@ -135,7 +140,10 @@ export class rgbMaskFilter extends Filter {
  * 老照片滤镜
  */
 export class OldPhotoFilter extends Filter {
-    name = 'oldPhotoFilter';
+    constructor(option?: OldPhotoOption) {
+        super(option);
+    }
+    name = 'OldPhotoFilter';
     option: OldPhotoOption = {
         rColor: {
             r: 0.28, g: 0.72, b: 0.22, a: 1
@@ -161,5 +169,48 @@ export class OldPhotoFilter extends Filter {
  * 模糊滤镜
  */
 export class BlurFilter extends Filter {
-    name = 'blurFilter';
+    constructor(option?: BlurFilterOption) {
+        super(option);
+    }
+    name = 'BlurFilter';
+
+    option: BlurFilterOption = {
+        radius: 10,
+        sigma: 5
+    }
+
+    private genGaussMatrix(option: BlurFilterOption = this.option) {
+        const matrix = [];
+        let sum = 0, x=0, y=0, i=0, j=0, k=0, len=0;
+        let r=0, g=0, b=-1/(2*option.sigma*option.sigma), a=1/(Math.sqrt(2*Math.PI) * option.sigma);
+        // 生成高斯矩阵
+        for(i=0, x=-option.radius; x<=option.radius; x++, i++) {
+            g = a * Math.exp(b * x * x);
+            matrix[i] = g;
+            sum += g;
+        }
+        // 归一化，保证高斯矩阵的值 在0-1之间
+        for(i=0, len=matrix.length; i<len; i++) {
+            matrix[i] /= sum;
+        }
+    }
+
+    filter(data: ImageData, option: FilterOption = this.option) {
+
+    }
 }
+
+
+const filters: { [key: string]: IFilter } = {
+    ReverseFilter,
+    GrayFilter,
+    BlackFilter,
+    BrightnessFilter,
+    RGBFilter,
+    OpacityFilter,
+    RGBMaskFilter,
+    OldPhotoFilter,
+    BlurFilter
+};
+
+export default filters;
