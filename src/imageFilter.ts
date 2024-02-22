@@ -2,11 +2,13 @@
 import {
     FilterType,
     IFilter,
+    Color,
+    FilterOption,
     IFilterManager
 } from './filterTypes';
 
 export default class ImageFilters implements IFilterManager {
-    constructor(filters?: FilterType[]) {
+    constructor(filters?: IFilter[]) {
         if(filters && filters.length) {
             this.filters.push(...filters);
         }
@@ -22,7 +24,7 @@ export default class ImageFilters implements IFilterManager {
     }
 
     // 所有支持的滤镜
-    protected filters = new Array<FilterType>();
+    protected filters = new Array<IFilter>();
 
     /**
      * 把图片转成数据
@@ -61,16 +63,21 @@ export default class ImageFilters implements IFilterManager {
             image = await this.convertToImageData(image);
         }
 
+        // 滤镜处理, 如果是全量统一处理的滤镜，则直接处理原始数据
+        filters.map(({filter, option}) => {                
+            if(filter && image instanceof ImageData) filter(image, option);
+        });
+
         for(let i=0; i < image.data.length; i += 4) {
-            let color = {
+            let color: Color = {
                 r: image.data[i],
                 g: image.data[i+1],
                 b: image.data[i+2],
                 a: image.data[i+3],
             };
             // 滤镜处理
-            filters.map((filter) => {
-                color = typeof filter === 'function'? filter(color): filter.filter(color);
+            filters.map(({filterColor, option}) => {                
+                if(filterColor) color = filterColor(color, option);
             });
             image.data[i] = color.r;
             image.data[i+1] = color.g;
@@ -96,8 +103,17 @@ export default class ImageFilters implements IFilterManager {
      * 添加滤镜
      * @param filter 
      */
-    add(filter: IFilter | IFilter[]): void {
-        if(Array.isArray(filter)) this.filters.push(...filter);
+    add(filter: IFilter | FilterType | Array< IFilter| FilterType>): void {
+       
+        if(Array.isArray(filter)) {
+            for(const f of filter) this.add(f);
+        }
+        else if(typeof filter === 'function') {
+            this.filters.push({
+                name: '',
+                filter: filter
+            })
+        }
         else this.filters.push(filter);
     }
 
@@ -105,13 +121,13 @@ export default class ImageFilters implements IFilterManager {
      * 移除滤镜
      * @param filter 
      */
-    remove(filter: IFilter | IFilter[]): void {
+    remove(filter: FilterType | IFilter | Array<IFilter|string|FilterType> | string): void {
         if(Array.isArray(filter)) {
             for(const f of filter) this.remove(f);
         }
         else {
             for(let i=this.filters.length-1; i>=0; i--) {
-                if(this.filters[i] === filter) {
+                if((typeof filter === 'string' && this.filters[i].name === filter) || this.filters[i] === filter || this.filters[i].filter === filter) {
                     this.filters.splice(i, 1);
                 }
             }
