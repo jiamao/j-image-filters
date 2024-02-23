@@ -71,6 +71,9 @@ export interface IFilter {
      * @param option 
      */
     filter?(data: ImageData, option?: FilterOption): ImageData;
+
+    // 转成json
+    toJSON?(): object;
 }
 
 export interface IFilterManager {

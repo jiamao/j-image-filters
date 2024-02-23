@@ -26,4 +26,5 @@ export interface IFilter
 |  --- | --- |
 |  [filter(data, option)?](./j-image-filters.ifilter.filter.md) | _(Optional)_ 对整个数据进行统一处理 |
 |  [filterColor(color, option)?](./j-image-filters.ifilter.filtercolor.md) | _(Optional)_ 滤镜颜色处理逻辑 |
+|  [toJSON()?](./j-image-filters.ifilter.tojson.md) | _(Optional)_ |
 

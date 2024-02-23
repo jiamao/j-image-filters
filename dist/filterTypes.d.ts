@@ -58,6 +58,7 @@ export interface IFilter {
      * @param option
      */
     filter?(data: ImageData, option?: FilterOption): ImageData;
+    toJSON?(): object;
 }
 export interface IFilterManager {
     /**

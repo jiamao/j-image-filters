@@ -19,6 +19,14 @@ class Filter {
         v = Math.round(v);
         return v;
     };
+    // 转成json
+    toJSON() {
+        return {
+            name: this.name,
+            displayName: this.displayName,
+            optin: this.option
+        };
+    }
 }
 /**
  * 反色滤镜

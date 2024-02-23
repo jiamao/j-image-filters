@@ -9,7 +9,7 @@ export abstract class Filter implements IFilter {
     name: string;
     displayName?: string;
 
-    option?: FilterOption = {
+    option: FilterOption = {
         luminance: 0
     };
     filterColor(color: Color){
@@ -22,6 +22,15 @@ export abstract class Filter implements IFilter {
         v = Math.max(v, 0);
         v = Math.round(v);
         return v;
+    }
+
+    // 转成json
+    toJSON() {
+        return {
+            name: this.name,
+            displayName: this.displayName,
+            optin: this.option
+        }
     }
 }
 

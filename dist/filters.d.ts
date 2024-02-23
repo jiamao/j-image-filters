@@ -3,9 +3,14 @@ export declare abstract class Filter implements IFilter {
     constructor(option?: FilterOption);
     name: string;
     displayName?: string;
-    option?: FilterOption;
+    option: FilterOption;
     filterColor(color: Color): Color;
     protected checkColorValue: (v: number) => number;
+    toJSON(): {
+        name: string;
+        displayName: string;
+        optin: FilterOption;
+    };
 }
 /**
  * 反色滤镜
