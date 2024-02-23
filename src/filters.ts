@@ -25,11 +25,11 @@ export abstract class Filter implements IFilter {
     }
 
     // 转成json
-    toJSON() {
+    toJSON(): IFilter {
         return {
             name: this.name,
             displayName: this.displayName,
-            optin: this.option
+            option: this.option
         }
     }
 }

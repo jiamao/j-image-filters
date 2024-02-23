@@ -58,7 +58,7 @@ export interface IFilter {
      * @param option
      */
     filter?(data: ImageData, option?: FilterOption): ImageData;
-    toJSON?(): object;
+    toJSON?(): IFilter;
 }
 export interface IFilterManager {
     /**
@@ -99,4 +99,5 @@ export interface IFilterManager {
      * @param data
      */
     toBase64(data: ImageData): string;
+    toJSON?(): Array<IFilter>;
 }

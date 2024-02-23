@@ -36,4 +36,5 @@ export default class ImageFilters implements IFilterManager {
      * @param filter
      */
     remove(filter: FilterType | IFilter | Array<IFilter | string | FilterType> | string): void;
+    toJSON(): IFilter[];
 }

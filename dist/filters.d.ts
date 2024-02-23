@@ -6,11 +6,7 @@ export declare abstract class Filter implements IFilter {
     option: FilterOption;
     filterColor(color: Color): Color;
     protected checkColorValue: (v: number) => number;
-    toJSON(): {
-        name: string;
-        displayName: string;
-        optin: FilterOption;
-    };
+    toJSON(): IFilter;
 }
 /**
  * 反色滤镜

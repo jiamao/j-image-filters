@@ -73,7 +73,7 @@ export interface IFilter {
     filter?(data: ImageData, option?: FilterOption): ImageData;
 
     // 转成json
-    toJSON?(): object;
+    toJSON?(): IFilter;
 }
 
 export interface IFilterManager {
@@ -122,4 +122,7 @@ export interface IFilterManager {
      * @param data 
      */
     toBase64(data: ImageData): string;
+
+    // 转成json
+    toJSON?(): Array<IFilter>;
 }

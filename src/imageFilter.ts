@@ -156,4 +156,13 @@ export default class ImageFilters implements IFilterManager {
         }
     }
 
+    toJSON(): IFilter[] {
+        const res = [];
+        if(this.count) {
+            for(const f of this.filters) {
+                res.push(f.toJSON());
+            }
+        }
+        return res;
+    }
 }

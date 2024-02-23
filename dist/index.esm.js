@@ -24,7 +24,7 @@ class Filter {
         return {
             name: this.name,
             displayName: this.displayName,
-            optin: this.option
+            option: this.option
         };
     }
 }
@@ -453,6 +453,15 @@ class ImageFilters {
                 }
             }
         }
+    }
+    toJSON() {
+        const res = [];
+        if (this.count) {
+            for (const f of this.filters) {
+                res.push(f.toJSON());
+            }
+        }
+        return res;
     }
 }
 

@@ -24,7 +24,7 @@ export class Filter {
         return {
             name: this.name,
             displayName: this.displayName,
-            optin: this.option
+            option: this.option
         };
     }
 }
