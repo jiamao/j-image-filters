@@ -87,11 +87,11 @@ export class BlackFilter extends Filter {
  * 亮度滤镜
  */
 export class BrightnessFilter extends Filter {
+    constructor(option?: FilterOption) {
+        super(option);
+    }
     name = 'BrightnessFilter';
     displayName = '亮度';
-    option = {
-        luminance: 0
-    }
     // 颜色处理
     filterColor(color: Color, option: FilterOption = this.option) {
         if(option.luminance === 0) return color;
@@ -161,20 +161,22 @@ export class OldPhotoFilter extends Filter {
     constructor(option?: OldPhotoOption) {
         super(option);
         if(option) this.option = option;
+        this.option = {
+            rColor: {
+                r: 0.28, g: 0.72, b: 0.22, a: 1
+            },
+            gColor: {
+                r: 0.25, g: 0.63, b: 0.13, a: 1
+            },
+            bColor: {
+                r: 0.17, g: 0.66, b: 0.13, a: 1
+            },
+            ...this.option
+        }
     }
     name = 'OldPhotoFilter';
     displayName = '老照片';
-    option: OldPhotoOption = {
-        rColor: {
-            r: 0.28, g: 0.72, b: 0.22, a: 1
-        },
-        gColor: {
-            r: 0.25, g: 0.63, b: 0.13, a: 1
-        },
-        bColor: {
-            r: 0.17, g: 0.66, b: 0.13, a: 1
-        }
-    };
+    declare option: OldPhotoOption;
     // 颜色处理
     filterColor(color: Color, option = this.option) {
         color.r = this.checkColorValue(color.r * option.rColor.r + color.g * option.rColor.g+ color.b * option.rColor.b);
@@ -191,27 +193,30 @@ export class OldPhotoFilter extends Filter {
 export class BlurFilter extends Filter {
     constructor(option?: BlurFilterOption) {
         super(option);
+        this.option = Object.assign({
+            radius: 10,
+            sigma: 5
+        }, this.option)
     }
     name = 'BlurFilter';
     displayName = '模糊';
 
-    option: BlurFilterOption = {
-        radius: 10,
-        sigma: 5
-    }
+    declare option: BlurFilterOption;
 
     private genGaussMatrix(option: BlurFilterOption = this.option) {
         const matrix = [];
-        let sum = 0, x=0, i=0, len=0;
-        let r=0, g=0, b=-1/(2*option.sigma*option.sigma), a=1/(Math.sqrt(2*Math.PI) * option.sigma);
+        let sum = 0;
+        let b = -1 / (2 * option.sigma * option.sigma), 
+        a = 1 / (Math.sqrt(2 * Math.PI) * option.sigma);
+
         // 生成高斯矩阵
-        for(i=0, x=-option.radius; x<=option.radius; x++, i++) {
-            g = a * Math.exp(b * x * x);
+        for(let i=0, x=-option.radius; x<=option.radius; x++, i++) {
+            const g = a * Math.exp(b * x * x);
             matrix[i] = g;
             sum += g;
         }
         // 归一化，保证高斯矩阵的值 在0-1之间
-        for(i=0, len=matrix.length; i<len; i++) {
+        for(let i=0; i<matrix.length; i++) {
             matrix[i] /= sum;
         }
         return matrix;
@@ -220,17 +225,16 @@ export class BlurFilter extends Filter {
     filter(data: ImageData, option: BlurFilterOption = this.option) {
         const matrix = this.genGaussMatrix(option);
 
-        let sum = 0;
         // X方向一维高斯运算
         for(let y=0; y<data.height; y++) {
             for(let x=0; x<data.width; x++) {
-                let r=0,g=0,b=0,i=0;
-                sum = 0;
+                let r=0,g=0,b=0;
+                let sum = 0;
                 for(let j=-option.radius; j<=option.radius; j++) {
                     let k= x+j;
                     // 确保K没超出X范围
                     if(k >= 0 && k < data.width) {
-                        i = (y * data.width + k) * 4;
+                        const i = (y * data.width + k) * 4;
                         const mi = matrix[j+option.radius];
                         r += data.data[i] * mi;
                         g += data.data[i+1] * mi;
@@ -238,7 +242,7 @@ export class BlurFilter extends Filter {
                         sum += mi;
                     }
                 }
-                i = (y * data.width + x) * 4;
+                const i = (y * data.width + x) * 4;
                 // 除以sum是为了消除处于边缘的像素，高斯运算不足问题
                 data.data[i] = r / sum;
                 data.data[i+1] = g / sum;
@@ -249,13 +253,13 @@ export class BlurFilter extends Filter {
         // X方向一维高斯运算
         for(let x=0; x<data.width; x++) {
             for(let y=0; y<data.height; y++) {
-                let r=0,g=0,b=0,i=0;
-                sum = 0;
+                let r=0,g=0,b=0;
+                let sum = 0;
                 for(let j=-option.radius; j<=option.radius; j++) {
                     let k= y+j;
                     // 确保K没超出y范围
                     if(k >= 0 && k < data.height) {
-                        i = (y * data.width + k) * 4;
+                        const i = (k * data.width + x) * 4;
                         const mi = matrix[j+option.radius];
                         r += data.data[i] * mi;
                         g += data.data[i+1] * mi;
@@ -263,7 +267,7 @@ export class BlurFilter extends Filter {
                         sum += mi;
                     }
                 }
-                i = (y * data.width + x) * 4;
+                const i = (y * data.width + x) * 4;
                 // 除以sum是为了消除处于边缘的像素，高斯运算不足问题
                 data.data[i] = r / sum;
                 data.data[i+1] = g / sum;
@@ -280,13 +284,14 @@ export class BlurFilter extends Filter {
 export class MosaicFilter extends Filter {
     constructor(option?: MosaicFilterOption) {
         super(option);
+        this.option = Object.assign({
+            blur: 6 // 马赛克范围
+        }, this.option);
     }
     name = 'MosaicFilter';
     displayName = '马赛克';
 
-    option: MosaicFilterOption = {
-        blur: 6 // 马赛克范围
-    }
+    declare option: MosaicFilterOption;
 
     filter(data: ImageData, option: MosaicFilterOption = this.option) {
         const blurR = 2 * option.blur + 1;

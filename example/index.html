@@ -39,7 +39,15 @@
 	function setFilter(name) {
 		imgFilters.clear();
 
-		imgFilters.add(new filters[name]());
+		imgFilters.add(new filters[name]({
+			luminance: -100,
+			 r: 100,
+			 // 马赛克范围
+			 blur: 5,
+			 // 高斯模糊属性
+            radius: 20,
+            sigma: 10
+		}));
 		imgFilters.filter(source).then((data) => {
 
 			const dst = imgFilters.toBase64(data);

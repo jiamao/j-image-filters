@@ -37,11 +37,9 @@ export declare class BlackFilter extends Filter {
  * 亮度滤镜
  */
 export declare class BrightnessFilter extends Filter {
+    constructor(option?: FilterOption);
     name: string;
     displayName: string;
-    option: {
-        luminance: number;
-    };
     filterColor(color: Color, option?: FilterOption): Color;
 }
 /**
