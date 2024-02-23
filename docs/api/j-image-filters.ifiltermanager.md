@@ -14,7 +14,11 @@ export interface IFilterManager
 
 |  Method | Description |
 |  --- | --- |
-|  [add(filter)](./j-image-filters.ifiltermanager.add.md) |  |
-|  [clear()](./j-image-filters.ifiltermanager.clear.md) |  |
-|  [remove(filter)](./j-image-filters.ifiltermanager.remove.md) |  |
+|  [add(filter)](./j-image-filters.ifiltermanager.add.md) | 加入滤镜 |
+|  [clear()](./j-image-filters.ifiltermanager.clear.md) | 清空滤镜 |
+|  [convertToImageData(img)](./j-image-filters.ifiltermanager.converttoimagedata.md) | 把图片转为imagedata |
+|  [filter(image, filters)](./j-image-filters.ifiltermanager.filter.md) | 应用滤镜 |
+|  [get(name)](./j-image-filters.ifiltermanager.get.md) | 根据滤镜名获取滤镜对象 |
+|  [remove(filter)](./j-image-filters.ifiltermanager.remove.md) | 移除滤镜 |
+|  [toBase64(data)](./j-image-filters.ifiltermanager.tobase64.md) | 转base64 |
 

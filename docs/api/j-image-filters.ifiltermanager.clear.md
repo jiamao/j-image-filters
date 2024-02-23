@@ -4,6 +4,8 @@
 
 ## IFilterManager.clear() method
 
+清空滤镜
+
 **Signature:**
 
 ```typescript

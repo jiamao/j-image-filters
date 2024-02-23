@@ -60,7 +60,38 @@ export interface IFilter {
     filter?(data: ImageData, option?: FilterOption): ImageData;
 }
 export interface IFilterManager {
+    /**
+     * 根据滤镜名获取滤镜对象
+     * @param name
+     * @returns
+     */
+    get(name: string): IFilter | undefined;
+    /**
+     * 加入滤镜
+     * @param filter
+     */
     add(filter: IFilter | Array<IFilter | FilterType>): void;
+    /**
+     * 移除滤镜
+     * @param filter
+     */
     remove(filter: FilterType | IFilter | Array<IFilter | string | FilterType> | string): void;
+    /**
+     * 清空滤镜
+     */
     clear(): void;
+    /**
+     * 把图片转为imagedata
+     * @param img
+     */
+    convertToImageData(img: HTMLImageElement | string): Promise<ImageData>;
+    /**
+     * 应用滤镜
+     */
+    filter(image: ImageData | HTMLImageElement, filters?: Array<IFilter>): Promise<ImageData>;
+    /**
+     * 转base64
+     * @param data
+     */
+    toBase64(data: ImageData): string;
 }

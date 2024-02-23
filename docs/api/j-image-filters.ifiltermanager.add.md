@@ -4,6 +4,8 @@
 
 ## IFilterManager.add() method
 
+加入滤镜
+
 **Signature:**
 
 ```typescript

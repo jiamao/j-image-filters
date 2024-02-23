@@ -31,6 +31,7 @@ export default class ImageFilters implements IFilterManager
 |  [clear()](./j-image-filters.imagefilters.clear.md) |  |  |
 |  [convertToImageData(img)](./j-image-filters.imagefilters.converttoimagedata.md) |  | 把图片转成数据 |
 |  [filter(image, filters)](./j-image-filters.imagefilters.filter.md) |  | 应用滤镜 |
+|  [get(name)](./j-image-filters.imagefilters.get.md) |  | 根据滤镜名获取滤镜对象 |
 |  [remove(filter)](./j-image-filters.imagefilters.remove.md) |  | 移除滤镜 |
 |  [toBase64(data)](./j-image-filters.imagefilters.tobase64.md) |  |  |
 

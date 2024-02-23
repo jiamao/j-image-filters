@@ -5,6 +5,12 @@ export default class ImageFilters implements IFilterManager {
     private _ctx;
     private get context();
     protected filters: IFilter[];
+    /**
+     * 根据滤镜名获取滤镜对象
+     * @param name
+     * @returns
+     */
+    get(name: string): IFilter | undefined;
     clear(): void;
     /**
      * 把图片转成数据

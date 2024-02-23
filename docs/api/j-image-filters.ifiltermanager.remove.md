@@ -4,6 +4,8 @@
 
 ## IFilterManager.remove() method
 
+移除滤镜
+
 **Signature:**
 
 ```typescript

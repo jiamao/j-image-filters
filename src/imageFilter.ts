@@ -26,6 +26,17 @@ export default class ImageFilters implements IFilterManager {
     // 所有支持的滤镜
     protected filters = new Array<IFilter>();
 
+    /**
+     * 根据滤镜名获取滤镜对象
+     * @param name 
+     * @returns 
+     */
+    get(name: string): IFilter|undefined {
+        for(const f of this.filters) {
+            if(f.name === name) return f;
+        }
+    }
+
     clear() {
         this.filters.splice(0, this.filters.length);
     }
@@ -125,7 +136,7 @@ export default class ImageFilters implements IFilterManager {
      * 移除滤镜
      * @param filter 
      */
-    remove(filter: FilterType | IFilter | Array<IFilter|string|FilterType> | string): void {
+    remove(filter: FilterType | IFilter | Array< IFilter | string| FilterType> | string): void {
         if(Array.isArray(filter)) {
             for(const f of filter) this.remove(f);
         }
