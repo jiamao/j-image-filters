@@ -19,7 +19,9 @@ export default class ImageFilters implements IFilterManager {
     private _ctx: CanvasRenderingContext2D;
     private get context() {
         if(this._ctx) return this._ctx;
-        this._ctx = this.canvas.getContext('2d');
+        this._ctx = this.canvas.getContext('2d', {
+            willReadFrequently: true
+        });
         return this._ctx;
     }
 
