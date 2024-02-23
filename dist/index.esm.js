@@ -363,6 +363,7 @@ class ImageFilters {
             el.src = img;
             return this.convertToImageData(el);
         }
+        img.crossOrigin = 'anonymous';
         return new Promise((resolve) => {
             if (!img.complete) {
                 img.onload = async (e) => {
