@@ -104,6 +104,15 @@ export declare class MosaicFilter extends Filter {
     filter(data: ImageData, option?: MosaicFilterOption): ImageData;
 }
 declare const filters: {
-    [key: string]: IFilter;
+    ReverseFilter: typeof ReverseFilter;
+    GrayFilter: typeof GrayFilter;
+    BlackFilter: typeof BlackFilter;
+    BrightnessFilter: typeof BrightnessFilter;
+    RGBFilter: typeof RGBFilter;
+    OpacityFilter: typeof OpacityFilter;
+    RGBMaskFilter: typeof RGBMaskFilter;
+    OldPhotoFilter: typeof OldPhotoFilter;
+    BlurFilter: typeof BlurFilter;
+    MosaicFilter: typeof MosaicFilter;
 };
 export default filters;

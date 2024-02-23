@@ -334,7 +334,7 @@ export class MosaicFilter extends Filter {
 }
 
 
-const filters: { [key: string]: IFilter } = {
+const filters = {
     ReverseFilter,
     GrayFilter,
     BlackFilter,
