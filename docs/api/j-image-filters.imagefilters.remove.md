@@ -9,14 +9,14 @@
 **Signature:**
 
 ```typescript
-remove(filter: IFilter | IFilter[]): void;
+remove(filter: FilterType | IFilter | Array<IFilter | string | FilterType> | string): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [IFilter](./j-image-filters.ifilter.md) \| [IFilter](./j-image-filters.ifilter.md)<!-- -->\[\] |  |
+|  filter | [FilterType](./j-image-filters.filtertype.md) \| [IFilter](./j-image-filters.ifilter.md) \| Array&lt;[IFilter](./j-image-filters.ifilter.md) \| string \| [FilterType](./j-image-filters.filtertype.md)<!-- -->&gt; \| string |  |
 
 **Returns:**
 

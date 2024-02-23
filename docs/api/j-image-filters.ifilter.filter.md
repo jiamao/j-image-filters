@@ -4,22 +4,22 @@
 
 ## IFilter.filter() method
 
-滤镜颜色处理逻辑
+对整个数据进行统一处理
 
 **Signature:**
 
 ```typescript
-filter(color: Color): Color;
+filter?(data: ImageData, option?: FilterOption): ImageData;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  color | [Color](./j-image-filters.color.md) | 颜色 |
+|  data | ImageData |  |
+|  option | [FilterOption](./j-image-filters.filteroption.md) | _(Optional)_ |
 
 **Returns:**
 
-[Color](./j-image-filters.color.md)
-
+ImageData
 

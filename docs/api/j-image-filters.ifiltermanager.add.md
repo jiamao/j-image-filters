@@ -7,14 +7,14 @@
 **Signature:**
 
 ```typescript
-add(filter: FilterType | Array`<FilterType>`): void;
+add(filter: IFilter | Array<IFilter | FilterType>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [FilterType](./j-image-filters.filtertype.md) \| Array&lt;[FilterType](./j-image-filters.filtertype.md)<!-- -->&gt; |  |
+|  filter | [IFilter](./j-image-filters.ifilter.md) \| Array&lt;[IFilter](./j-image-filters.ifilter.md) \| [FilterType](./j-image-filters.filtertype.md)<!-- -->&gt; |  |
 
 **Returns:**
 

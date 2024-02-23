@@ -15,5 +15,6 @@ export interface IFilterManager
 |  Method | Description |
 |  --- | --- |
 |  [add(filter)](./j-image-filters.ifiltermanager.add.md) |  |
+|  [clear()](./j-image-filters.ifiltermanager.clear.md) |  |
 |  [remove(filter)](./j-image-filters.ifiltermanager.remove.md) |  |
 

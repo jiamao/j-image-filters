@@ -14,8 +14,18 @@
 
 |  Interface | Description |
 |  --- | --- |
+|  [BlurFilterOption](./j-image-filters.blurfilteroption.md) | 模糊参数 |
+|  [FilterOption](./j-image-filters.filteroption.md) |  |
 |  [IFilter](./j-image-filters.ifilter.md) | 滤镜接口 |
 |  [IFilterManager](./j-image-filters.ifiltermanager.md) |  |
+|  [MosaicFilterOption](./j-image-filters.mosaicfilteroption.md) | 马赛克参数 |
+|  [OldPhotoOption](./j-image-filters.oldphotooption.md) | 老照片滤镜参数 |
+
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [filters](./j-image-filters.filters.md) |  |
 
 ## Type Aliases
 

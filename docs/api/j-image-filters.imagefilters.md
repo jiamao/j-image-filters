@@ -21,13 +21,14 @@ export default class ImageFilters implements IFilterManager
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [filters](./j-image-filters.imagefilters.filters.md) | <code>protected</code> | [FilterType](./j-image-filters.filtertype.md)<!-- -->\[\] |  |
+|  [filters](./j-image-filters.imagefilters.filters.md) | <code>protected</code> | [IFilter](./j-image-filters.ifilter.md)<!-- -->\[\] |  |
 
 ## Methods
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
 |  [add(filter)](./j-image-filters.imagefilters.add.md) |  | 添加滤镜 |
+|  [clear()](./j-image-filters.imagefilters.clear.md) |  |  |
 |  [convertToImageData(img)](./j-image-filters.imagefilters.converttoimagedata.md) |  | 把图片转成数据 |
 |  [filter(image, filters)](./j-image-filters.imagefilters.filter.md) |  | 应用滤镜 |
 |  [remove(filter)](./j-image-filters.imagefilters.remove.md) |  | 移除滤镜 |

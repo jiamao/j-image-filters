@@ -9,12 +9,12 @@ Constructs a new instance of the `ImageFilters` class
 **Signature:**
 
 ```typescript
-constructor(filters?: FilterType[]);
+constructor(filters?: IFilter[]);
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filters | [FilterType](./j-image-filters.filtertype.md)<!-- -->\[\] | _(Optional)_ |
+|  filters | [IFilter](./j-image-filters.ifilter.md)<!-- -->\[\] | _(Optional)_ |
 

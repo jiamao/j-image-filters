@@ -9,14 +9,14 @@
 **Signature:**
 
 ```typescript
-add(filter: IFilter | IFilter[]): void;
+add(filter: IFilter | FilterType | Array<IFilter | FilterType>): void;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  filter | [IFilter](./j-image-filters.ifilter.md) \| [IFilter](./j-image-filters.ifilter.md)<!-- -->\[\] |  |
+|  filter | [IFilter](./j-image-filters.ifilter.md) \| [FilterType](./j-image-filters.filtertype.md) \| Array&lt;[IFilter](./j-image-filters.ifilter.md) \| [FilterType](./j-image-filters.filtertype.md)<!-- -->&gt; |  |
 
 **Returns:**
 

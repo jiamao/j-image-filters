@@ -7,5 +7,5 @@
 **Signature:**
 
 ```typescript
-protected filters: FilterType[];
+protected filters: IFilter[];
 ```

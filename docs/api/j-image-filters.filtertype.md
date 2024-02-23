@@ -7,7 +7,7 @@
 **Signature:**
 
 ```typescript
-export type FilterType = IFilter | ((color: Color) => Color);
+export type FilterType = ((color: Color, option?: FilterOption) => Color);
 ```
-**References:** [IFilter](./j-image-filters.ifilter.md)<!-- -->, [Color](./j-image-filters.color.md)
+**References:** [Color](./j-image-filters.color.md)<!-- -->, [FilterOption](./j-image-filters.filteroption.md)
 

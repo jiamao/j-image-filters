@@ -9,7 +9,7 @@
 **Signature:**
 
 ```typescript
-filter(image: ImageData | HTMLImageElement, filters?: FilterType[]): Promise`<ImageData>`;
+filter(image: ImageData | HTMLImageElement, filters?: IFilter[]): Promise`<ImageData>`;
 ```
 
 ## Parameters
@@ -17,7 +17,7 @@ filter(image: ImageData | HTMLImageElement, filters?: FilterType[]): Promise`<Im
 |  Parameter | Type | Description |
 |  --- | --- | --- |
 |  image | ImageData \| HTMLImageElement |  |
-|  filters | [FilterType](./j-image-filters.filtertype.md)<!-- -->\[\] | _(Optional)_ |
+|  filters | [IFilter](./j-image-filters.ifilter.md)<!-- -->\[\] | _(Optional)_ |
 
 **Returns:**
 

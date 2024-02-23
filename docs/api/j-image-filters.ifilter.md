@@ -12,9 +12,18 @@
 export interface IFilter 
 ```
 
+## Properties
+
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [displayName?](./j-image-filters.ifilter.displayname.md) |  | string | _(Optional)_ |
+|  [name](./j-image-filters.ifilter.name.md) |  | string |  |
+|  [option?](./j-image-filters.ifilter.option.md) |  | [FilterOption](./j-image-filters.filteroption.md) | _(Optional)_ 调节参数 |
+
 ## Methods
 
 |  Method | Description |
 |  --- | --- |
-|  [filter(color)](./j-image-filters.ifilter.filter.md) | 滤镜颜色处理逻辑 |
+|  [filter(data, option)?](./j-image-filters.ifilter.filter.md) | _(Optional)_ 对整个数据进行统一处理 |
+|  [filterColor(color, option)?](./j-image-filters.ifilter.filtercolor.md) | _(Optional)_ 滤镜颜色处理逻辑 |
 
