@@ -6,6 +6,10 @@ export default class ImageFilters implements IFilterManager {
     private get context();
     protected filters: IFilter[];
     /**
+     * 当前滤镜个数
+     */
+    get count(): number;
+    /**
      * 根据滤镜名获取滤镜对象
      * @param name
      * @returns

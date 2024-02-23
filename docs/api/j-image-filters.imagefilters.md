@@ -21,6 +21,7 @@ export default class ImageFilters implements IFilterManager
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
+|  [count](./j-image-filters.imagefilters.count.md) | <code>readonly</code> | number | 当前滤镜个数 |
 |  [filters](./j-image-filters.imagefilters.filters.md) | <code>protected</code> | [IFilter](./j-image-filters.ifilter.md)<!-- -->\[\] |  |
 
 ## Methods

@@ -67,6 +67,10 @@ export interface IFilterManager {
      */
     get(name: string): IFilter | undefined;
     /**
+     * 当前滤镜个数
+     */
+    get count(): number;
+    /**
      * 加入滤镜
      * @param filter
      */

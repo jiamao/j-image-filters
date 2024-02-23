@@ -16,6 +16,12 @@ export default class ImageFilters {
     // 所有支持的滤镜
     filters = new Array();
     /**
+     * 当前滤镜个数
+     */
+    get count() {
+        return this.filters.length;
+    }
+    /**
      * 根据滤镜名获取滤镜对象
      * @param name
      * @returns
